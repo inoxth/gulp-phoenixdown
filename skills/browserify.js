@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
 var source = require('vinyl-source-stream');
-var browserSync = require('./browser-sync');
 
 module.exports = function(src, dest) {
   var options = {
@@ -33,11 +32,6 @@ module.exports = function(src, dest) {
 
       return bundler.bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-        .on('end', function() {
-          if (watch) {
-            browserSync.reload();
-          }
-        })
         .pipe(source(path.basename(options.src)))
         .pipe(gulp.dest(options.dest));
     }
