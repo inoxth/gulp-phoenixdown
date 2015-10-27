@@ -2,6 +2,10 @@
   "name": "gulp-phoenixdown",
   "description": "A simple-but-fantasy-ish API for defining basic Gulp tasks for your (especially Laravel) web application",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/inoxth/gulp-phoenixdown.git"
+  },
   "main": "index.js",
   "dependencies": {
     "browserify": "6.*",
