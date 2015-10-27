@@ -13,7 +13,7 @@ module.exports = function(src, dest) {
   var task = function() {
     var files = vinylPaths();
 
-    del(options.dest);
+    del.sync(options.dest);
 
     return gulp.src(options.src, {
       base: options.base

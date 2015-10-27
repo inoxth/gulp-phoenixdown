@@ -8,7 +8,7 @@ If you're eliminated, Elixir can't help you, but Phoenix Down can.
 
 ## Installation
 
-First, `phoenixdown` as an dependency in `devDependencies` of your `package.json` file, and run `npm install`.
+First, add `phoenixdown` as an dependency in `devDependencies` of your `package.json` file, and run `npm install`.
 
 ## Usage
 
@@ -23,8 +23,12 @@ Require `phoenixdown` in your `Gulpfile.js`, then just cast it:
 ## Built-in skills
 
 * angularTemplateCache
+* all
 * browserSync
 * browserify
+* clean
+* concat
+* copy
 * jshint
 * less
 * version
@@ -34,6 +38,16 @@ Require `phoenixdown` in your `Gulpfile.js`, then just cast it:
 Make template cache for AngularJS, from `src` to `dest`.
 
     gulp.task('template', cast.angularTemplateCache(src).to(dest));
+
+### all
+
+Cast many skills at once.
+
+    gulp.task('copy', cast.all(
+        cast.copy(src1).to(dest1),
+        cast.copy(src2).to(dest2),
+        cast.copy(src3).to(dest3),
+    ));
 
 ### browserSync
 
@@ -54,6 +68,18 @@ Declaring the task:
 Or call in `watch` task:
 
     cast.browserify(src).to(dest).watch();
+
+### clean
+
+    gulp.task('clean', cast.clean(src));
+
+### concat
+
+    gulp.task('concat', cast.concat(src).to(dest));
+
+### copy
+
+    gulp.task('copy', cast.copy('src').to('dest'));
 
 ### jshint
 

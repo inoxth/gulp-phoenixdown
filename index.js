@@ -1,5 +1,8 @@
 module.exports = {
-  config: require('./config.js'),
+  config: require('./config'),
+  all: require('./skills/all'),
+  clean: require('./skills/clean'),
+  concat: require('./skills/concat'),
   angularTemplateCache: require('./skills/angular-template-cache'),
   browserify: require('./skills/browserify'),
   browserSync: require('./skills/browser-sync'),
