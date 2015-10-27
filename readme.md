@@ -2,25 +2,27 @@
 
 Phoenixdown provides a simple-but-fantasy-ish API for defining basic Gulp tasks for your (especially Laravel) web application.
 
-However, instead of providing all new API style like Elixir, we just provide a simple functions to use will Gulp.
+However, instead of providing all new API style like [Elixir](https://github.com/laravel/elixir), we just provide a simple functions to use will Gulp.
 
-If you're eliminated, Elixir can't help you, but Phoenix Down can.
+If you're eliminated, [Elixir](https://github.com/laravel/elixir) can't help you, but [Phoenix Down](https://github.com/inoxth/gulp-phoenixdown) can.
 
 ## Installation
 
-First, add `phoenixdown` as an dependency in `devDependencies` of your `package.json` file, and run `npm install`.
+First, add `gulp-phoenixdown` as an dependency in `devDependencies` of your `package.json` file, and run `npm install`.
 
 ## Usage
 
-Require `phoenixdown` in your `Gulpfile.js`, then just cast it:
+Require `gulp-phoenixdown` in your `gulpfile.js`, then just "cast" it:
 
 ```js
 var gulp = require('gulp');
-var cast = require('phoenixdown');
+var cast = require('gulp-phoenixdown');
 
-gulp.task('browserify', cast.browserify('./resources/assets/js/app.js'));
-gulp.task('less', cast.less('./resources/assets/less/app.less'));
+gulp.task('browserify', cast.browserify('./resources/assets/js/app.js').to('./public/js'));
+gulp.task('less', cast.less('./resources/assets/less/app.less').to('./public/css'));
 ```
+
+That's it! We just provide skills: the functions to create common tasks easily. However, if you want more tasks, you can just use Gulp directly.
 
 ## Built-in skills
 
@@ -63,6 +65,8 @@ To start the server:
 cast.browserSync.startProxy(server);
 ```
 
+You may omit the `server` argument, and it will try to use value from `APP_URL` or `APP_DOMAIN` of `.env` file in the project.
+
 To reload the server:
 
 ```js
@@ -70,6 +74,8 @@ cast.browserSync.reload();
 ```
 
 ### browserify
+
+Bundle JavaScripts with [Browserify](https://github.com/substack/browserify-handbook).
 
 Declaring the task:
 
@@ -103,7 +109,7 @@ gulp.task('copy', cast.copy(src).to(dest));
 
 ### jshint
 
-Lint JavaScript files.
+Lint JavaScript files with [JSHint](http://jshint.com/about/).
 
 ```js
 gulp.task('jshint', cast.jshint(src));
@@ -111,7 +117,7 @@ gulp.task('jshint', cast.jshint(src));
 
 ### less
 
-Compile LESS files from `src` to css into `dest` directory.
+Compile [LESS](http://lesscss.org/) files from `src` to css into `dest` directory.
 
 ```js
 gulp.task('less', cast.less(src).to(dest));
