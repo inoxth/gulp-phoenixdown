@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 
-module.exports = function(src) {
+module.exports = function(src, dest) {
   var options = {
     src: src || 'resources/assets/less/*.less',
     dest: dest || 'public/css'
