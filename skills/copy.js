@@ -8,7 +8,7 @@ module.exports = function(src, dest) {
 
   var task = function() {
     return gulp.src(options.src)
-      .dest(gulp.dest(options.dest));
+      .pipe(gulp.dest(options.dest));
   };
 
   task.from = function(src) {

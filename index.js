@@ -3,6 +3,7 @@ module.exports = {
   all: require('./skills/all'),
   clean: require('./skills/clean'),
   concat: require('./skills/concat'),
+  copy: require('./skills/copy'),
   angularTemplateCache: require('./skills/angular-template-cache'),
   browserify: require('./skills/browserify'),
   browserSync: require('./skills/browser-sync'),
