@@ -14,11 +14,13 @@ First, add `phoenixdown` as an dependency in `devDependencies` of your `package.
 
 Require `phoenixdown` in your `Gulpfile.js`, then just cast it:
 
-    var gulp = require('gulp');
-    var cast = require('phoenixdown');
-    
-    gulp.task('browserify', cast.browserify('./resources/assets/js/app.js'));
-    gulp.task('less', cast.less('./resources/assets/less/app.less'));
+```js
+var gulp = require('gulp');
+var cast = require('phoenixdown');
+
+gulp.task('browserify', cast.browserify('./resources/assets/js/app.js'));
+gulp.task('less', cast.less('./resources/assets/less/app.less'));
+```
 
 ## Built-in skills
 
@@ -37,62 +39,86 @@ Require `phoenixdown` in your `Gulpfile.js`, then just cast it:
 
 Make template cache for AngularJS, from `src` to `dest`.
 
-    gulp.task('template', cast.angularTemplateCache(src).to(dest));
+```js
+gulp.task('template', cast.angularTemplateCache(src).to(dest));
+```
 
 ### all
 
 Cast many skills at once.
 
-    gulp.task('copy', cast.all(
-        cast.copy(src1).to(dest1),
-        cast.copy(src2).to(dest2),
-        cast.copy(src3).to(dest3),
-    ));
+```js
+gulp.task('copy', cast.all(
+    cast.copy(src1).to(dest1),
+    cast.copy(src2).to(dest2),
+    cast.copy(src3).to(dest3),
+));
+```
 
 ### browserSync
 
 To start the server:
 
-    cast.browserSync.startProxy(server);
+```js
+cast.browserSync.startProxy(server);
+```
 
 To reload the server:
 
-    cast.browserSync.reload();
+```js
+cast.browserSync.reload();
+```
 
 ### browserify
 
 Declaring the task:
 
-    gulp.task('browserify', cast.browserify(src).to(dest));
+```js
+gulp.task('browserify', cast.browserify(src).to(dest));
+```
 
 Or call in `watch` task:
 
-    cast.browserify(src).to(dest).watch();
+```js
+cast.browserify(src).to(dest).watch();
+```
 
 ### clean
 
-    gulp.task('clean', cast.clean(src));
+```js
+gulp.task('clean', cast.clean(src));
+```
 
 ### concat
 
-    gulp.task('concat', cast.concat(src).to(dest));
+```js
+gulp.task('concat', cast.concat(src).to(dest));
+```
 
 ### copy
 
-    gulp.task('copy', cast.copy('src').to('dest'));
+```js
+gulp.task('copy', cast.copy(src).to(dest));
+```
 
 ### jshint
 
-Lint JavaScript files from `src`.
+Lint JavaScript files.
 
-    gulp.task('jshint', cast.jshint(src));
+```js
+gulp.task('jshint', cast.jshint(src));
+```
 
 ### less
 
 Compile LESS files from `src` to css into `dest` directory.
 
-    gulp.task('less', cast.less(src).to(dest));
+```js
+gulp.task('less', cast.less(src).to(dest));
+```
 
 ### version
 
-    gulp.task('version', cast.version(src).to(dest));
+```js
+gulp.task('version', cast.version(src).to(dest));
+```
