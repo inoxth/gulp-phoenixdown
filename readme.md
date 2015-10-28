@@ -8,11 +8,11 @@ If you're eliminated, [Elixir](https://github.com/laravel/elixir) can't help you
 
 ## Installation
 
-First, add `gulp-phoenixdown` as an dependency in `devDependencies` of your `package.json` file, and run `npm install`.
+Add `gulp-phoenixdown` as an dependency in `devDependencies` of your `package.json` file, then run `npm install`.
 
 ## Usage
 
-Require `gulp-phoenixdown` in your `gulpfile.js`, then just "cast" it:
+Require `gulp-phoenixdown` in your `gulpfile.js`, then just "cast" some skills:
 
 ```js
 var gulp = require('gulp');
@@ -127,4 +127,42 @@ gulp.task('less', cast.less(src).to(dest));
 
 ```js
 gulp.task('version', cast.version(src).to(dest));
+```
+
+## Sample
+
+```js
+var gulp = require('gulp');
+var cast = require('gulp-phoenixdown');
+
+// Task Set
+var build = ['browserify', 'template', 'less', 'copy'];
+var postBuild = ['version'];
+var develop = ['server', 'watch'];
+
+// Usage
+gulp.task('default', build.concat(postBuild));
+gulp.task('develop', build.concat(postBuild).concat(develop));
+
+// Build
+gulp.task('browserify', cast.browserify('./resources/assets/js/app.js').to('public/js'));
+gulp.task('template', cast.angularTemplateCache('./resources/assets/templates/**/*.html').to('public/js'));
+gulp.task('less', cast.less('./resources/assets/less/app.less').to('public/css'));
+gulp.task('copy', cast.copy('./node_modules/bootstrap/dist/fonts/**/*').to('public/fonts'));
+gulp.task('version', build, cast.version([
+  './public/js/app.js',
+  './public/js/templates.js',
+  './public/css/app.css',
+]).to('public/build'));
+
+// Develop
+gulp.task('server', cast.browserSync.startProxy);
+gulp.task('reload', build, cast.browserSync.reload);
+gulp.task('watch', function() {
+  cast.browserify('./resources/assets/js/app.js').to('public/js').watch();
+  gulp.watch('./resources/assets/templates/**/*.html', ['reload']);
+  gulp.watch('./resources/assets/less/**/*.less', ['reload']);
+  gulp.watch('./public/js/app.js', ['reload']);
+});
+
 ```
