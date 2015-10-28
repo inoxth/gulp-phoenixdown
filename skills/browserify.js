@@ -5,17 +5,27 @@ var gutil = require('gulp-util');
 var path = require('path');
 var source = require('vinyl-source-stream');
 
+// Share cache across browserify
+var cache = {};
+var packageCache = {};
+
+// Dictionary of watched source,
+// that should be skipped by normal browserify task.
+var watchList = {};
+
 module.exports = function(src, dest) {
   var options = {
     src: src || './resources/assets/js/app.js',
     dest: dest || 'public/js'
   };
 
-  // Share cache across browserify
-  var cache = {};
-  var packageCache = {};
-
   var task = function(callback, watch) {
+    if (watchList[options.src] == true) {
+      gutil.log('Already bundled by watchify');
+      callback();
+      return;
+    }
+
     var bundler = browserify({
       entries: [options.src],
       debug: true,
@@ -24,6 +34,7 @@ module.exports = function(src, dest) {
     });
 
     if (watch) {
+      watchList[options.src] = true;
       bundler = watchify(bundler, { poll: 500 });
     }
 
