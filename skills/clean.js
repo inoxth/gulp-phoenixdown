@@ -6,8 +6,8 @@ module.exports = function(src) {
     src: src
   };
 
-  var task = function() {
-    return del(options.src);
+  var task = function(callback) {
+    return del(options.src, callback);
   }
 
   return task;
