@@ -50,10 +50,10 @@ module.exports = function(src, dest, shouldUglify) {
         .pipe(source(path.basename(options.src)));
 
       if (options.uglify) {
-        pipe.pipe(buffer())
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(sourcemaps.write(options.dest));
+        pipe = pipe.pipe(buffer())
+          .pipe(sourcemaps.init())
+          .pipe(uglify())
+          .pipe(sourcemaps.write(options.dest));
       }
 
       return pipe.pipe(gulp.dest(options.dest));
