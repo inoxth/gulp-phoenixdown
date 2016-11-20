@@ -75,6 +75,11 @@ module.exports = function(src, dest, uglify) {
     return task;
   }
 
+  task.uglify = function(uglify) {
+    options.uglify = (uglify !== null) ? uglify : true;
+    return task;
+  }
+
   task.watch = function(watch) {
     return task(null, true);
   }
