@@ -1,9 +1,12 @@
 var browserify = require('browserify');
 var watchify = require('watchify');
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var uglify = require('gulp-uglify');
 var path = require('path');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 // Share cache across browserify
 var cache = {};
@@ -13,10 +16,11 @@ var packageCache = {};
 // that should be skipped by normal browserify task.
 var watchList = {};
 
-module.exports = function(src, dest) {
+module.exports = function(src, dest, uglify) {
   var options = {
     src: src || './resources/assets/js/app.js',
-    dest: dest || 'public/js'
+    dest: dest || 'public/js',
+    uglify: uglify || false,
   };
 
   var task = function(callback, watch) {
@@ -41,10 +45,18 @@ module.exports = function(src, dest) {
     function rebundle() {
       gutil.log('Bundling', gutil.colors.cyan(src));
 
-      return bundler.bundle()
+      var pipe = bundler.bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-        .pipe(source(path.basename(options.src)))
-        .pipe(gulp.dest(options.dest));
+        .pipe(source(path.basename(options.src)));
+
+      if (options.uglify) {
+        pipe.pipe(buffer())
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write(options.dest));
+      }
+
+      return pipe.pipe(gulp.dest(options.dest));
     }
 
     bundler.on('update', rebundle);
