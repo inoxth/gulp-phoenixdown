@@ -16,11 +16,11 @@ var packageCache = {};
 // that should be skipped by normal browserify task.
 var watchList = {};
 
-module.exports = function(src, dest, uglify) {
+module.exports = function(src, dest, shouldUglify) {
   var options = {
     src: src || './resources/assets/js/app.js',
     dest: dest || 'public/js',
-    uglify: uglify || false,
+    uglify: shouldUglify || false,
   };
 
   var task = function(callback, watch) {
@@ -76,7 +76,7 @@ module.exports = function(src, dest, uglify) {
   }
 
   task.uglify = function(uglify) {
-    options.uglify = (uglify !== null) ? uglify : true;
+    options.uglify = (uglify !== undefined) ? uglify : true;
     return task;
   }
 
