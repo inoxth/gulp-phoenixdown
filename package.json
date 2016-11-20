@@ -2,7 +2,7 @@
   "name": "gulp-phoenixdown",
   "description": "A simple-but-fantasy-ish API for defining basic Gulp tasks for your (especially Laravel) web application",
   "license": "MIT",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "repository": {
     "type": "git",
     "url": "git://github.com/inoxth/gulp-phoenixdown.git"
@@ -34,6 +34,7 @@
     "gulp-jshint": "1.*",
     "gulp-less": "3.*",
     "gulp-rev": "2.*",
+    "gulp-sourcemap": "1.*",
     "gulp-util": "3.*",
     "gulp-uglify": "2.*",
     "jshint-stylish": "2.*",
