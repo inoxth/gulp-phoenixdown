@@ -35,9 +35,11 @@
     "gulp-less": "3.*",
     "gulp-rev": "2.*",
     "gulp-util": "3.*",
+    "gulp-uglify": "2.*",
     "jshint-stylish": "2.*",
     "merge-stream": "1.*",
     "minifyify": "7.*",
+    "vinyl-buffer": "1.*",
     "vinyl-paths": "1.*",
     "vinyl-source-stream": "1.*",
     "watchify": "3.*"
